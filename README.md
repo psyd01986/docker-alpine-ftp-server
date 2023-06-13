@@ -1,60 +1,60 @@
-# docker-alpine-ftp-server
-[![Docker Stars](https://img.shields.io/docker/stars/delfer/alpine-ftp-server.svg)](https://hub.docker.com/r/delfer/alpine-ftp-server/) [![Docker Pulls](https://img.shields.io/docker/pulls/delfer/alpine-ftp-server.svg)](https://hub.docker.com/r/delfer/alpine-ftp-server/) [![Docker Automated build](https://img.shields.io/docker/automated/delfer/alpine-ftp-server.svg)](https://hub.docker.com/r/delfer/alpine-ftp-server/) [![Docker Build Status](https://img.shields.io/docker/build/delfer/alpine-ftp-server.svg)](https://hub.docker.com/r/delfer/alpine-ftp-server/) [![MicroBadger Layers](https://img.shields.io/microbadger/layers/delfer/alpine-ftp-server.svg)](https://hub.docker.com/r/delfer/alpine-ftp-server/) [![MicroBadger Size](https://img.shields.io/microbadger/image-size/delfer/alpine-ftp-server.svg)](https://hub.docker.com/r/delfer/alpine-ftp-server/)  
-Small and flexible docker image with vsftpd server
+# docker-alpine-ftp-сервер
+[![Docker Stars](https://img.shields.io/docker/stars/delfer/alpine-ftp-server.svg)](https://hub.docker.com/r/delfer/alpine-ftp -server/) [![Docker Pulls](https://img.shields.io/docker/pulls/delfer/alpine-ftp-server.svg)](https://hub.docker.com/r/delfer /alpine-ftp-server/) [![Автоматизированная сборка Docker](https://img.shields.io/docker/automated/delfer/alpine-ftp-server.svg)](https://hub.docker. com/r/delfer/alpine-ftp-server/) [![Статус сборки Docker](https://img.shields.io/docker/build/delfer/alpine-ftp-server.svg)](https:/ /hub.docker.com/r/delfer/alpine-ftp-server/) [![MicroBadger Layers](https://img.shields.io/microbadger/layers/delfer/alpine-ftp-server.svg)] (https://hub.docker.com/r/delfer/alpine-ftp-server/) [![Размер MicroBadger](https://img.shields.io/microbadger/image-size/delfer/alpine-ftp -server.svg)](https://hub.docker.com/r/delfer/alpine-ftp-сервер/)  
+Небольшой и гибкий образ докера с сервером vsftpd
 
-## Usage
+## Использование
 ```
-docker run -d \
-    -p 21:21 \
+докер запустить -d \
+    -р 21:21\
     -p 21000-21010:21000-21010 \
-    -e USERS="one|1234" \
-    -e ADDRESS=ftp.site.domain \
-    delfer/alpine-ftp-server
+    -e ПОЛЬЗОВАТЕЛИ="один|1234" \
+    -e АДРЕС=ftp.site.domain \
+    delfer/alpine-ftp-сервер
 ```
 
-## Configuration
+## Конфигурация
 
-Environment variables:
-- `USERS` - space and `|` separated list (optional, default: `alpineftp|alpineftp`)
-  - format `name1|password1|[folder1][|uid1][|gid1] name2|password2|[folder2][|uid2][|gid2]`
-- `ADDRESS` - external address witch clients can connect passive ports (optional, should resolve to ftp server ip address)
-- `MIN_PORT` - minimum port number to be used for passive connections (optional, default `21000`)
-- `MAX_PORT` - maximum port number to be used for passive connections (optional, default `21010`)
+Переменные среды:
+- `ПОЛЬЗОВАТЕЛИ` - список, разделенный пробелами и `|` (необязательно, по умолчанию: `alpineftp|alpineftp`)
+  - формат `имя1|пароль1|[папка1][|uid1][|gid1] имя2|пароль2|[папка2][|uid2][|gid2]`
+- `АДРЕС` - внешний адрес, по которому клиенты могут подключаться к пассивным портам (необязательно, должен разрешаться в IP-адрес ftp-сервера)
+- `MIN_PORT` - минимальный номер порта, который будет использоваться для пассивных подключений (необязательно, по умолчанию `21000`)
+- `MAX_PORT` - максимальный номер порта, который будет использоваться для пассивных подключений (необязательно, по умолчанию `21010`)
 
-## USERS examples
+## ПОЛЬЗОВАТЕЛИ примеры
 
-- `user|password foo|bar|/home/foo`
-- `user|password|/home/user/dir|10000`
-- `user|password|/home/user/dir|10000|10000`
-- `user|password||10000`
-- `user|password||10000|82` : add to an existing group (www-data)
+- `пользователь|пароль foo|bar|/home/foo`
+- `пользователь|пароль|/home/пользователь/каталог|10000`
+- `пользователь|пароль|/home/пользователь/каталог|10000|10000`
+- `пользователь|пароль||10000`
+- `пользователь|пароль||10000|82`: добавить в существующую группу (www-данные)
 
-## FTPS (File Transfer Protocol + SSL) Example
+## FTPS (протокол передачи файлов + SSL) Пример
 
-Issue free Let's Encrypt certificate and use it with `alpine-ftp-server`.
+Выпустите бесплатный сертификат Let's Encrypt и используйте его с `alpine-ftp-server`.
 
 ```
 mkdir -p /etc/letsencrypt
-docker run -it --rm \
-    -p 80:80 \
+докер запустить -it --rm \
+    -р 80:80 \
     -v "/etc/letsencrypt:/etc/letsencrypt" \
-    certbot/certbot certonly \
-    --standalone \
-    --preferred-challenges http \
-    -n --agree-tos \
+    certbot/certbot точно \
+    --автономный \
+    --предпочтительные вызовы http \
+    -n --согласиться с \
     --email i@delfer.ru \
-    -d ftp.site.domain
-docker run -d \
-    --name ftp \
-    -p 21:21 \
+    -d ftp.сайт.домен
+докер запустить -d \
+    --имя фтп \
+    -р 21:21\
     -p 21000-21010:21000-21010 \
-    -e USERS="one|1234" \
-    -e ADDRESS=ftp.site.domain \
+    -e ПОЛЬЗОВАТЕЛИ="один|1234" \
+    -e АДРЕС=ftp.site.domain \
     -e TLS_CERT="/etc/letsencrypt/live/ftp.site.domain/fullchain.pem" \
     -e TLS_KEY="/etc/letsencrypt/live/ftp.site.domain/privkey.pem" \
-    delfer/alpine-ftp-server
+    delfer/alpine-ftp-сервер
 ```
 
-- Do not forget to replace ftp.site.domain with actual domain pointing to your server's IP.
-- Be sure you have avalible port 80 for standalone mode of certbot to issue certificate.
-- Do not forget to renew certificate in 3 month with `certbot renew` command.
+- Не забудьте заменить ftp.site.domain на фактический домен, указывающий на IP вашего сервера.
+- Убедитесь, что у вас есть доступный порт 80 для автономного режима certbot для выдачи сертификата.
+- Не забудьте обновить сертификат через 3 месяца с помощью команды `certbot renew`.
