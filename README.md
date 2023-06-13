@@ -1,5 +1,4 @@
 # docker-alpine-ftp-сервер
-[![Docker Stars](https://img.shields.io/docker/stars/delfer/alpine-ftp-server.svg)](https://hub.docker.com/r/delfer/alpine-ftp -server/) [![Docker Pulls](https://img.shields.io/docker/pulls/delfer/alpine-ftp-server.svg)](https://hub.docker.com/r/delfer /alpine-ftp-server/) [![Автоматизированная сборка Docker](https://img.shields.io/docker/automated/delfer/alpine-ftp-server.svg)](https://hub.docker. com/r/delfer/alpine-ftp-server/) [![Статус сборки Docker](https://img.shields.io/docker/build/delfer/alpine-ftp-server.svg)](https:/ /hub.docker.com/r/delfer/alpine-ftp-server/) [![MicroBadger Layers](https://img.shields.io/microbadger/layers/delfer/alpine-ftp-server.svg)] (https://hub.docker.com/r/delfer/alpine-ftp-server/) [![Размер MicroBadger](https://img.shields.io/microbadger/image-size/delfer/alpine-ftp -server.svg)](https://hub.docker.com/r/delfer/alpine-ftp-сервер/)  
 Небольшой и гибкий образ докера с сервером vsftpd
 
 ## Использование
@@ -58,3 +57,6 @@ mkdir -p /etc/letsencrypt
 - Не забудьте заменить ftp.site.domain на фактический домен, указывающий на IP вашего сервера.
 - Убедитесь, что у вас есть доступный порт 80 для автономного режима certbot для выдачи сертификата.
 - Не забудьте обновить сертификат через 3 месяца с помощью команды `certbot renew`.
+
+## Полезные ссылки
+- [Оригинальный проект](https://github.com/delfer/docker-alpine-ftp-server)
